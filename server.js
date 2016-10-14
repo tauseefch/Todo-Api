@@ -2,7 +2,11 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 var PORT = process.env.PORT || 3000;
-var todos = [];
+var todos = [{
+	description: "haji",
+	completed: true,
+	id: 1
+}];
 var todoNextId = 1;
 
 app.use(bodyParser.json());
@@ -32,14 +36,14 @@ app.get('/todos/:id', function(req, res) {
 });
 
 // POST /todos
-app.post('/todos', function(req, res) {
-	var body = req.body;
-	//add id filed
-	body.id = todoNextId++;
-	//push body into array
-	todos.push(body);
-	res.json(body);
-});
+// app.post('/todos', function(req, res) {
+// 	var body = req.body;
+// 	//add id filed
+// 	body.id = todoNextId++;
+// 	//push body into array
+// 	todos.push(body);
+// 	res.json(body);
+// });
 
 app.listen(PORT, function() {
 	console.log('Express listing on port ' + PORT + '!');
