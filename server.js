@@ -15,7 +15,14 @@ app.get('/', function(req, res) {
 
 // GET /todos
 app.get('/todos', function(req, res ) {
-	res.json(todos);
+	var queryParams = req.query;
+	var filterTodos = todos;
+	if(queryParams.hasOwnProperty('completed') && queryParams.completed === 'true'){
+		filterTodos = _.where(filterTodos, {completed: true});
+	} else if (queryParams.hasOwnProperty('completed') && queryParams.completed === 'false'){
+		filterTodos = _.where(filterTodos, {completed: false});
+	}
+	res.json(filterTodos);
 });
 //GET /todos/:id
 app.get('/todos/:id', function(req, res) {
